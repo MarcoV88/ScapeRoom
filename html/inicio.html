@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/inicio.css">
+    <title>ScapeRoom</title>
+</head>
+<body>
+
+<div class="flashlight-container">
+    <div class="dark-layer" id="flashlightLayer"></div>
+    
+    <img src="../img/foto_oculta.png" alt="Secreto" id="hiddenPhoto" class="hidden-photo">
+</div>
+
+<div class="main-layout">
+    <div class="left-content">
+        <img src="../img/hacker.png" alt="hacker" usemap="#hackerMap" class="hacker-img">
+        <map name="hackerMap">
+            <area shape="circle" coords="155, 55, 25" href="#" alt="Máscara" id="maskArea" style="cursor: crosshair;">
+        </map>
+        <button id="start"> INICIAR PARTIDA </button>
+    </div>
+
+    <div class="right-register">
+        <div class="register-header">
+            RECORD DE LOS AGENTES
+        </div>
+        <div class="div-user-table">
+            <table class="user-table" id="userTable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>USUARIO</th>
+                        <th>HORA REGISTRO</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr style="opacity:0.7;">
+                        <td colspan="3" style="text-align:center;">[ esperando intrusión... ]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="register-stats" id="statsInfo">
+             total registros: 0
+        </div>
+    </div>
+</div>
+
+<div id="customModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeModal1">&times;</span>
+        <h2>SISTEMA INTERCEPTADO</h2>
+        <hr>
+        <p>Has hecho clic en la máscara. El protocolo de seguridad ha sido vulnerado.</p>
+        <p class="pista">Pista: "El código se esconde en el pasado".</p>
+    </div>
+</div>
+
+<div id="secretModal" class="modal">
+    <div class="modal-content" style="border-color: #ff3333; box-shadow: 0 0 20px #ff3333;">
+        <span class="close-button" id="closeModal2" style="color: #ff3333;">&times;</span>
+        <h2 style="color: #ff3333;">ARCHIVOS CLASIFICADOS</h2>
+        <hr style="background: #ff3333;">
+        <p>¡Excelente! Has escaneado el cuadrante superior y descubierto los planos ocultos.</p>
+        <p class="pista" style="color: #00ff00;">PASSWORD: "C4ptur4_Th3_Fl4g"</p>
+    </div>
+</div>
+
+<script src="../js/inicio.js"></script>
+</body>
+</html>

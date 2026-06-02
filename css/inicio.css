@@ -1,0 +1,563 @@
+ /* =============================================
+           ESTILO TÉTRICO HACKER / ESCAPE ROOM
+           Modo oscuro, neones verdes, efecto CRT y glitch
+           + Layout con tabla de registro a la derecha
+        ============================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* sensación de terminal */
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 10%, #0a0f1a, #010408);
+            font-family: 'Courier New', 'Fira Code', monospace;
+            position: relative;
+            overflow-x: hidden;
+            cursor: crosshair;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* ========== EFECTO CRT (flicker + líneas de barrido) ========== */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03) 0px,
+                rgba(0, 255, 0, 0.03) 2px,
+                transparent 2px,
+                transparent 8px
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9), 0 0 0 2px #0f3f1a inset;
+            pointer-events: none;
+            z-index: 5;
+            animation: flicker 0.18s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Línea de escaneo animada */
+        .scan-line {
+            position: fixed;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #2eff7a, #00ff55, #2eff7a, transparent);
+            opacity: 0.5;
+            z-index: 15;
+            pointer-events: none;
+            animation: scanMove 6s linear infinite;
+            box-shadow: 0 0 12px #1eff6e;
+        }
+
+        @keyframes scanMove {
+            0% { top: -5%; opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { top: 105%; opacity: 0; }
+        }
+
+        /* Layout principal: izquierda contenido, derecha tabla */
+        .main-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            justify-content: center;
+            align-items: stretch;
+            z-index: 20;
+            position: relative;
+        }
+
+        /* Columna izquierda: botón + imagen */
+        .left-content {
+            flex: 1.2;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            background: rgba(0, 10, 5, 0.55);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 2rem 1.5rem;
+            border: 1px solid #1aff6e55;
+            box-shadow: 0 0 25px rgba(0, 255, 100, 0.2);
+        }
+
+        /* Columna derecha: tabla de registro */
+        .right-register {
+            flex: 0.9;
+            min-width: 300px;
+            background: #020a05c9;
+            backdrop-filter: blur(5px);
+            border-radius: 28px;
+            border: 2px solid #24ff7c;
+            box-shadow: 0 0 30px #00ff6633, inset 0 0 8px #1eff6e33;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s ease;
+        }
+
+        .right-register:hover {
+            box-shadow: 0 0 40px #2eff8e55;
+            border-color: #6effaa;
+        }
+
+        .register-header {
+            font-size: 1.3rem;
+            text-align: center;
+            color: #aaffcc;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 2px solid #1eff6e;
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .register-header span {
+            font-size: 1.6rem;
+        }
+
+        /* Tabla estilo terminal */
+        .user-table-wrapper {
+            overflow-x: auto;
+            max-height: 460px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #1eff6e #031a0b;
+        }
+
+        .user-table-wrapper::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .user-table-wrapper::-webkit-scrollbar-track {
+            background: #031a0b;
+            border-radius: 10px;
+        }
+        .user-table-wrapper::-webkit-scrollbar-thumb {
+            background: #1eff6e;
+            border-radius: 10px;
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #bef5d3;
+        }
+
+        .user-table th {
+            background: #082010dd;
+            color: #9effb0;
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 2px solid #2eff8a;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(4px);
+        }
+
+        .user-table td {
+            padding: 8px 8px;
+            border-bottom: 1px dashed #1faa4e;
+            font-size: 0.8rem;
+        }
+
+        .user-table tr:hover td {
+            background: #1c4a2a30;
+            color: #f0fff0;
+            text-shadow: 0 0 2px #6effaa;
+        }
+
+        /* Contador de registros */
+        .register-stats {
+            margin-top: 18px;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #6effaa;
+            background: #031a0e80;
+            padding: 6px;
+            border-radius: 20px;
+            border-left: 3px solid #2eff6e;
+        }
+
+        /* Botón principal estilo hacker */
+        #start {
+            background: #030b05e0;
+            backdrop-filter: blur(4px);
+            border: 2px solid #12ff6e;
+            color: #aaffcf;
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: 60px;
+            box-shadow: 0 0 12px #00ff6e55, inset 0 0 6px #00ff6e33;
+            width: auto;
+            min-width: 260px;
+            text-shadow: 0 0 4px #00ff77;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #start:hover {
+            background: #0b2f18;
+            border-color: #9aff6e;
+            color: #e0ffe6;
+            box-shadow: 0 0 28px #32ff7e, inset 0 0 10px #d0ffc0;
+            transform: scale(1.03);
+            letter-spacing: 8px;
+            text-shadow: 0 0 8px #1eff88;
+        }
+
+        #start:active {
+            transform: scale(0.97);
+            background: #021a0b;
+        }
+
+        #start::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(80, 255, 80, 0.2), transparent);
+            transition: left 0.45s ease;
+            pointer-events: none;
+        }
+
+        #start:hover::before {
+            left: 100%;
+        }
+
+        /* Imagen hacker */
+        img[alt="hacker"] {
+            max-width: 260px;
+            width: 80%;
+            border-radius: 28px;
+            border: 2px solid #1aff6e;
+            box-shadow: 0 0 25px rgba(0, 255, 100, 0.5);
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 6px #0f0) grayscale(0.2);
+            background: #021a0b50;
+        }
+
+        img[alt="hacker"]:hover {
+            transform: scale(1.02) rotate(1deg);
+            border-color: #9aff6e;
+            box-shadow: 0 0 40px #33ff88;
+            filter: drop-shadow(0 0 10px #1aff6e) grayscale(0);
+        }
+
+        /* efecto glitch imagen */
+        @keyframes imgGlitch {
+            0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            95% { clip-path: inset(0 0 0 0); }
+            96% { clip-path: inset(10% 0 15% 0); transform: translate(-1px, 1px);}
+            97% { clip-path: inset(20% 0 5% 0); transform: translate(1px, -1px);}
+            100% { clip-path: inset(0 0 0 0); }
+        }
+        img[alt="hacker"] {
+            animation: imgGlitch 6s infinite ease-in-out;
+        }
+
+        /* Mensaje adicional */
+        .hint-text {
+            font-size: 0.75rem;
+            color: #6effb3;
+            background: #051a0e70;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* esquinero */
+        .console-watermark {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            font-size: 9px;
+            color: #2eaa5e;
+            background: #031a0bb3;
+            padding: 4px 10px;
+            border-radius: 18px;
+            z-index: 30;
+            border-left: 2px solid #0f0;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        } 
+
+        .glitch-tag {
+            position: fixed;
+            top: 15px;
+            right: 18px;
+            color: #2eff7a;
+            font-size: 10px;
+            background: #00000088;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-family: monospace;
+            letter-spacing: 1.5px;
+            z-index: 30;
+            backdrop-filter: blur(5px);
+            border: 0.5px solid #19ff6e;
+            pointer-events: none;
+            animation: blinkSoft 2s infinite;
+        }
+
+        @keyframes blinkSoft {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; text-shadow: 0 0 3px #0f0; }
+        }
+
+        @media (max-width: 750px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .left-content, .right-register {
+                width: 100%;
+            }
+            #start {
+                font-size: 1.4rem;
+                min-width: 200px;
+            }
+        }
+
+
+/* ==========================================================================
+   ESTILOS DEL MODAL (ESTÉTICA HACKER / ESCAPEROOM)
+   ========================================================================== */
+
+/* Fondo del modal: cubre toda la pantalla y es semitransparente */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 9999; /* Por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px); /* Efecto difuminado de fondo */
+}
+
+/* Caja contenedora del contenido del modal */
+.modal-content {
+    background-color: #050d05; /* Verde muy oscuro */
+    margin: 15% auto;
+    padding: 25px;
+    border: 2px solid #00ff00; /* Borde verde neón */
+    border-radius: 8px;
+    width: 80%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    animation: aparecerModal 0.3s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes aparecerModal {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botón de cerrar (X) */
+.close-button {
+    color: #00ff00;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close-button:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Textos dentro del modal */
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.modal-content hr {
+    border: 0;
+    height: 1px;
+    background: #00ff00;
+    margin: 15px 0;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #a8ffa8;
+}
+
+.modal-content .pista {
+    color: #ff3333; /* Color rojo de alerta para la pista */
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+/* Contenedor que limita el juego de la linterna a la esquina superior derecha */
+.flashlight-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 250px;  
+    height: 250px;
+    overflow: hidden;
+    z-index: 2; /* Lo bajamos un poco para que el CRT general del body ayude a mimetizarlo */
+}
+
+.dark-layer {
+    position: absolute;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    
+    /* Variables iniciales */
+    --mouse-x: -500px; 
+    --mouse-y: -500px;
+    --radius: 35px;    
+
+    /* Mimetizamos el fondo: añadimos tus líneas de barrido antes del degradado de la linterna */
+    background: 
+        radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            transparent 0%,
+            transparent var(--radius),
+            rgba(0, 0, 0, 0.95) calc(var(--radius) + 5px),
+            rgba(0, 0, 0, 0.95) 100%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 0, 0.03) 0px,
+            rgba(0, 255, 0, 0.03) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    background-color: #000; /* Color base del fondo oscuro */
+}
+
+/* Imagen oculta */
+.hidden-photo {
+    position: absolute;
+    top: 100px;   
+    left: 100px;
+    width: 45px;
+    height: 45px;
+    opacity: 0; /* Oculta por defecto */
+    z-index: 1;   
+    transition: transform 0.2s;
+}
+
+.hidden-photo:hover {
+    transform: scale(1.15);
+    opacity: 100%;
+}
+
+/* ==========================================================================
+   ESTILOS DE LOS MODALES
+   ========================================================================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #050d05;
+    margin: 15% auto;
+    padding: 25px;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    animation: aparecerModal 0.3s ease-out;
+}
+
+@keyframes aparecerModal {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: #00ff00;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close-button:hover { color: #ffffff; }
+.modal-content h2 { margin-top: 0; font-size: 22px; letter-spacing: 2px; }
+.modal-content hr { border: 0; height: 1px; background: #00ff00; margin: 15px 0; }
+.modal-content p { font-size: 14px; color: #a8ffa8; }
+.modal-content .pista { font-weight: bold; margin-top: 20px; }
+        
