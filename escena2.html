@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Escena Interactiva</title>
+    <link rel="stylesheet" href="escena2.css">
+</head>
+<body>
+    <div id="bateria">
+        <div class="cabeza"></div>
+        <div></div>
+        <div class="barra" id="barra1"></div>
+        <div class="barra" id="barra2"></div>
+        <div class="barra" id="barra3"></div>
+        <div class="barra" id="barra4"></div>
+        <div class="barra" id="barra5"></div>
+        <div class="barra" id="barra6"></div>
+    </div>
+
+    <div class="contenedor-escena">
+        
+        <img src="img/escena2.jpg" usemap="#menuMap" class="imagen-proporcional" alt="Centro de datos">
+        
+        <div class="texto-superpuesto">🔍 EXPLORA LA IMAGEN | <strong>EL RATÓN NO CAMBIA EN ZONAS OCULTAS</strong> 🔍</div>
+        
+    </div>
+
+    <map name="menuMap">
+    <area shape="rect" coords="160,215,380,525" href="javascript:void(0)" onclick="abrirModal('modal-panel')" alt="Panel Eléctrico" style="cursor:auto;">
+
+    <area shape="rect" coords="650,550,900,400"  href="javascript:void(0)" onclick="abrirModal('modal-pantalla')" alt="Pantalla" style="cursor:auto;">
+
+    <area shape="rect" coords="1100,520,1350,915" href="javascript:void(0)" onclick="abrirModal('modal-planta')" alt="Planta" style="cursor:auto;">
+    </map>
+
+    <div id="modal-panel" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-panel')">&times;</span>
+            <h2>⚡ Central Servidores</h2>
+            <p>Has encontrado el panel de control central. Aquít tienes la lsita de los servidores</p>
+            <p>Servidor DNS:   192.168.1.1</p>
+            <p>Servidor DHCP:  192.168.1.100</p>
+            <p>Servidor Web:    10.0.0.5</p>
+        </div>
+    </div>
+
+    <div id="modal-pantalla" class="modal">
+    <div class="contenido-modal">
+        <span class="btn-cerrar" onclick="cerrarModal('modal-pantalla')">&times;</span>
+        <h2>🖥️ Pantalla del Servidor</h2>
+        <p>Introduce la IP de acceso al sistema (*.*.*.*):</p>
+        <input type="text" id="respuestaIP" placeholder="Escribe la IP aquí...">
+        <button id="btnVerificar">VERIFICAR IP</button>
+        <div id="mensaje" style="margin-top: 10px; font-size: 12px;">Esperando tu respuesta...</div>
+    </div>
+    </div>
+
+    <div id="modal-planta" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-planta')">&times;</span>
+            <h2>🌿 Planta de Oficina</h2>
+            <p>Es una hermosa Monstera de plástico. Al revisar entre sus hojas artificiales... ¡vaya!</p>
+            <p><strong>🔓 PISTA OCULTA:</strong> "No todas las IPs tienen cuatro números con sentido. Algunas representan conceptos. Busca la IP del vacío, la que todo lo acepta. En redes informáticas, significa 'cualquier dirección'. En la vida real, es el comienzo de todo. Esa es la llave."</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/imageMapResizer.min.js"></script>
+    <script src ="escena2.js" defer></script>
+
+</body>
+</html>
