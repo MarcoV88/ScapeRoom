@@ -92,6 +92,7 @@ comprobar.addEventListener("click", function(){
         input8.style.backgroundColor = "red";
         respuestas.splice(7,1,2);
     }
+    console.log(respuestas)
     let j = 0;
     let error = 0;
     let pista = 0;
@@ -103,7 +104,7 @@ comprobar.addEventListener("click", function(){
             error = 1;
         }
         if(respuestas[i] == 3){
-            respuestas++;
+            pista++;
         }
     }
     if(j == 8){
@@ -131,10 +132,22 @@ comprobar.addEventListener("click", function(){
             console.log(vidas)
         }
     }
-    if(respuestas == 8){
-        console.log("asd")
-    }
     const modal = document.getElementById("modal");
+    if(pista == 8){
+        modal.innerHTML = `
+                    <div class="modal">
+                        <p>Pista: </p>
+                        <button id="cerrar">x</button>
+                        <p>Código ASCII</p>
+                    </div>
+                `;
+                const cerrarModal = document.getElementById("cerrar");
+                
+                cerrarModal.addEventListener('click', () => {
+                    modal.close();
+                });
+                modal.showModal();
+    }
 
     if(vidas == 0){
                 modal.innerHTML = `
