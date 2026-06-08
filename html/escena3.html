@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escena 3 - Ataque Final</title>
+    <link rel="stylesheet" href="../css/escena3.css">
+</head>
+<body>
+
+    <div id="bateria">
+        <div class="cabeza"></div>
+        <div></div>
+        <div class="barra" id="barra1"></div>
+        <div class="barra" id="barra2"></div>
+        <div class="barra" id="barra3"></div>
+        <div class="barra" id="barra4"></div>
+        <div class="barra" id="barra5"></div>
+        <div class="barra" id="barra6"></div>
+    </div>
+
+    <div class="contenedor-escena">
+        <img src="../img/escena3.png" usemap="#menuMap" class="imagen-proporcional" alt="Sala de servidores - Ataque final">
+        <div class="texto-superpuesto">⚠️ ATAQUE FINAL | EL SERVIDOR NO RESPONDE AL PING ⚠️</div>
+    </div>
+
+    <map name="menuMap">
+        <area shape="rect" coords="760,150,1200,430" href="javascript:void(0)" onclick="abrirModal('modal-servidor')" alt="Pantalla Principal del Servidor" style="cursor:pointer;">
+        <area shape="rect" coords="50,360,470,1000" href="javascript:void(0)" onclick="abrirModal('modal-log')" alt="Manuales y Registros en Librería" style="cursor:pointer;">
+        <area shape="rect" coords="620,620,1000,1000" href="javascript:void(0)" onclick="abrirModal('modal-pc')" alt="Torre del Ordenador" style="cursor:pointer;">
+        <area shape="rect" coords="1210,150,1580,430" href="javascript:void(0)" onclick="abrirModal('modal-control')" alt="Pantalla de respuesta" style="cursor:pointer;">
+    </map>
+
+    <div id="modal-servidor" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-servidor')">&times;</span>
+            <h2>🖥️ Servidor Principal - Monitor Central</h2>
+            <p>El monitor del medio muestra un bucle en la terminal:</p>
+            <div style="background-color:#001100; padding:10px; border-left: 4px solid #00ff41; font-family:monospace; font-size:13px;">
+                > ping 10.0.0.7<br>
+                > Respuesta: tiempo de espera agotado.<br>
+                > Intentando conexión alternativa...<br>
+                > Conectando al puerto <strong style="color:#ffaa00;">443</strong> (HTTPS)...<br>
+                > Error: Certificado no válido.<br>
+                > Reiniciando handshake...
+            </div>
+            <p>Parece que la máquina central no responde a los pings, pero el puerto HTTPS está abierto.</p>
+        </div>
+    </div>
+
+    <div id="modal-log" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-log')">&times;</span>
+            <h2>📜 Estantería de libros</h2>
+            <p>Entre los libros antiguos de la librería, encuentras un cuaderno con anotaciones de red de los ingenieros:</p>
+            <div style="background-color:#001100; padding:10px; border-left: 4px solid #ffaa00; font-family:monospace; font-size:12px;">
+                [WARN] 23:59:47 - Intento de ping desde IP 192.168.1.45<br>
+                [WARN] 23:59:50 - Intento de ping desde IP 192.168.1.45<br>
+                [WARN] 23:59:53 - Intento de ping desde IP 192.168.1.45<br>
+                [ERROR] 00:00:00 - Demasiadas solicitudes. Servidor en modo sigilo.<br>
+                [INFO] 00:00:03 - Timeout configurado a <strong style="color:#ffaa00;">3</strong> segundos.<br>
+                [INFO] 00:00:05 - Esperando reconexión...<br>
+                🔓 <strong>PISTA:</strong> "El servidor solo espera unos segundos antes de bloquearse."
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-pc" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-pc')">&times;</span>
+            <h2>🔌 Torre del Ordenador</h2>
+            <p>Revisas el hardware de la torre que ruge bajo el escritorio. Los ventiladores brillan en naranja y encima del chasis hay un post-it pegado:</p>
+            <div style="background-color:#001100; padding:10px; border-left: 4px solid #00ff41; font-family:monospace;">
+                📝 <strong>"Notas de acceso:</strong><br>
+                • IP del gateway: 10.0.0.<strong style="color:#ffaa00; font-size:18px;">7</strong><br>
+                • Usuario: admin<br>
+                • Contraseña: ********<br>
+                • El servidor final está en la última IP de la subred."
+            </div>
+            <p style="margin-top:10px;">La IP 10.0.0.7 parece ser la máquina objetivo.</p>
+        </div>  
+    </div>
+
+    <div id="modal-control" class="modal">
+        <div class="contenido-modal">
+            <span class="btn-cerrar" onclick="cerrarModal('modal-control')">&times;</span>
+            <h2>🔐 PANEL DE CONTROL - CLAVE DE ACCESO</h2>
+            
+            <p>💡 <strong>Primera pista:</strong> Hay números ocultos que te van a ayudar a resolver el problema...</p>
+            
+            <input type="number" id="codigoSuma" placeholder="Escribe la suma aquí...">
+            <button id="btnVerificarSuma">🔓 VERIFICAR SUMA</button>
+            <div id="mensajeSuma">Esperando el código...</div>
+            
+            <div id="claveFinalContainer" style="display:none; margin-top:20px; border-top:1px solid #00ff41; padding-top:15px;">
+                
+                <!-- 🔥 ESTE ES EL ELEMENTO QUE NECESITAS -->
+                <p>🔑 <strong>NUEVA PISTA:</strong> <span id="pistaOculta" style="color:#ffaa00;"></span></p>
+                <button id="btnVolverInicio" style="position:fixed; bottom:20px; left:20px; z-index:2000; background-color:#0a0a0a; color:#00ff41; border:2px solid #00ff41; padding:10px 15px; cursor:pointer; font-family:monospace; border-radius:5px;">
+                    🏠 VOLVER AL INICIO (BUSCAR PISTA)
+                </button>
+                
+                <input type="number" id="codigoFinal" placeholder="Escribe la clave final aquí...">
+                <button id="btnVerificarFinal">💣 EJECUTAR EXPLOIT FINAL</button>
+                <div id="mensajeFinal">Esperando la clave final...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-victoria" class="modal">
+        <div class="contenido-modal" style="text-align:center;">
+            <h2>🏆 ¡SISTEMA HACKEADO! 🏆</h2>
+            <p>Has completado las 3 escenas.</p>
+            <p style="color:#00ff41; font-size:20px;">🕶️ ERES UN HACKER LEGENDARIO 🕶️</p>
+            <button id="reiniciarJuego">▶️ JUGAR DE NUEVO</button>
+        </div>
+    </div>
+
+    <script src="../js/escena3.js"></script>
+</body>
+</html>

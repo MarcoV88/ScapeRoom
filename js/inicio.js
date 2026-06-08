@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const maskArea = document.getElementById("maskArea");
     const modal = document.getElementById("customModal");
     const closeButton = document.querySelector(".close-button");
+    const empezar = document.getElementById("start");
 
     if (maskArea && modal) {
         maskArea.addEventListener("click", (e) => {
@@ -21,8 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.style.display = "none";
         }
     });
+    if (empezar){
+            empezar.addEventListener("click", function() {
+                window.location.href = "../html/escena1.html"; // Redirigir a la escena 1
+            });
+    }
 });
 
+// Verificar si hay partida guardada
+const partidaGuardada = sessionStorage.getItem("volviendoDesdeEscena3");
+const btnContinuar = document.getElementById("btnContinuar");
+
+if (partidaGuardada === "true" && btnContinuar) {
+    btnContinuar.style.display = "block";
+    
+    btnContinuar.addEventListener("click", function() {
+        window.location.href = "escena3.html";
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".flashlight-container");

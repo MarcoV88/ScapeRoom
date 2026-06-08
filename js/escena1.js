@@ -167,3 +167,7 @@ comprobar.addEventListener("click", function(){
 });
 
 
+img.addEventListener("click",function(){
+    window.location.href = "escena2.html";
+    })
+
