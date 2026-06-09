@@ -138,10 +138,6 @@ area {
     cursor: pointer;
 }
 
-/* ============================================ */
-/* ESTILOS PARA INPUTS Y BOTONES DEL MODAL      */
-/* ============================================ */
-
 /* Input de número */
 input[type="number"] {
     width: 100%;

@@ -146,7 +146,7 @@ function recuperarProgreso() {
 // Llamar a esta función al inicio
 recuperarProgreso();
 
-// 🔥 LÓGICA PRINCIPAL
+// LÓGICA PRINCIPAL
 function iniciarJuego() {
     const btnVerificarSuma = document.getElementById("btnVerificarSuma");
     const mensajeSuma = document.getElementById("mensajeSuma");
@@ -192,7 +192,7 @@ function iniciarJuego() {
         if (inputFinal) inputFinal.focus();
     }
         else {
-            // ❌ SUMA INCORRECTA
+            // SUMA INCORRECTA
             const vidasRestantes = perderVida();
             mensajeSuma.innerHTML = `❌ Suma incorrecta (${sumaIngresada} no es correcto). Te quedan ${vidasRestantes} vidas.`;
             mensajeSuma.style.borderLeftColor = "#ff4444";
@@ -214,14 +214,14 @@ function iniciarJuego() {
             const claveIngresada = parseInt(inputFinal.value);
             
             if (claveIngresada === CLAVE_FINAL) {
-                // ✅ VICTORIA FINAL
+                // VICTORIA FINAL
                 mensajeFinal.innerHTML = "✅ ¡CLAVE CORRECTA! Exploit ejecutado. Accediendo al sistema...";
                 mensajeFinal.style.borderLeftColor = "#00ff41";
                 mensajeFinal.style.color = "#00ff41";
                 mostrarVictoria();
             } 
             else {
-                // ❌ CLAVE INCORRECTA
+                // CLAVE INCORRECTA
                 const vidasRestantes = perderVida();
                 mensajeFinal.innerHTML = `❌ Clave incorrecta (${claveIngresada}). Te quedan ${vidasRestantes} vidas.`;
                 mensajeFinal.style.borderLeftColor = "#ff4444";
