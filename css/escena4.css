@@ -1,0 +1,263 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020602;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crt-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03) 0px,
+        rgba(0, 255, 0, 0.03) 2px,
+        transparent 2px,
+        transparent 8px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.escena {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.escena.activa {
+    display: flex;
+}
+
+.btn-regresar {
+    position: absolute;
+    bottom: 40px;
+    background: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 10px 20px;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.btn-regresar:hover {
+    background: #00ff00;
+    color: #000;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+
+.titulo-juego {
+    font-size: 24px;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.contenedor-puertas {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    max-width: 1100px;
+}
+
+.tarjeta-puerta {
+    background: #040f04;
+    border: 2px solid #00aa00;
+    border-radius: 10px;
+    width: 240px; 
+    padding: 20px 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-puerta:hover {
+    transform: translateY(-8px);
+    border-color: #00ff00;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+}
+
+.contenedor-imagen-puerta {
+    width: 100%;
+    height: 220px; 
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-puerta-render {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.3)) grayscale(30%);
+    transition: filter 0.3s ease;
+}
+
+.tarjeta-puerta:hover .imagen-puerta-render {
+    filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.7)) grayscale(0%);
+}
+
+.tarjeta-puerta h3 {
+    margin: 8px 0;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.desc-puerta {
+    font-size: 12px;
+    color: #00aa00;
+    margin: 0;
+}
+
+.tarjeta-puerta:hover .desc-puerta {
+    color: #00ff00;
+}
+
+
+#escena-puerta1 {
+    background-color: #000000; 
+    width: 100%;
+    height: 100%;
+    z-index: 50; 
+}
+
+.capa-oscura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    
+    --mouse-x: -1000px; 
+    --mouse-y: -1000px;
+    --radius: 65px; 
+
+    background: 
+        radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            transparent 0%,
+            transparent var(--radius),
+            rgba(0, 0, 0, 0.99) calc(var(--radius) + 5px),
+            rgba(0, 0, 0, 0.99) 100%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 0, 0.03) 0px,
+            rgba(0, 255, 0, 0.03) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    background-color: #000;
+}
+
+
+.pista-oculta {
+    position: absolute;
+    top: 75%; 
+    left: 60%; 
+    color: #00ff00;
+    font-size: 14px; 
+    line-height: 1.5;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff00;
+    z-index: 5;
+    user-select: none;
+}
+
+
+.caja-terminal, .caja-enigma {
+    background: #040f04;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 40px;
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.texto-enigma {
+    color: #a8ffa8;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.grupo-entrada {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.grupo-entrada input {
+    flex: 1;
+    background: #000;
+    border: 1px solid #00aa00;
+    padding: 12px;
+    color: #00ff00;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+}
+
+.grupo-entrada input:focus {
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.grupo-entrada button {
+    background: #00aa00;
+    border: none;
+    color: #000;
+    padding: 0 25px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.grupo-entrada button:hover {
+    background: #00ff00;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.registro-salida {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
