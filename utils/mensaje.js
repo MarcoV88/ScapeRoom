@@ -19,7 +19,7 @@ function data (texto, repoLink, c1, c2, c3)  {
             padding: 20px;
         }
         .card {
-            background-color: #0f0f15;
+            background-color: #ffffffff;
             border: 2px solid #00ff41;
             border-radius: 15px;
             padding: 30px;
