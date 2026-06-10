@@ -85,20 +85,6 @@ function mostrarGameOver() {
     modalGameOver.style.display = "block";
 }
 
-// Función para mostrar victoria final
-function mostrarVictoria() {
-    if (juegoCompletado) return;
-    juegoCompletado = true;
-    const modalVictoria = document.getElementById("modal-victoria");
-    if (modalVictoria) modalVictoria.style.display = "block";
-    
-    const reiniciar = document.getElementById("reiniciarJuego");
-    if (reiniciar) {
-        reiniciar.addEventListener("click", () => {
-            window.location.href = "inicio.html";
-        });
-    }
-}
 // Botón para volver al inicio guardando progreso
 const btnVolverInicio = document.getElementById("btnVolverInicio");
 
@@ -137,9 +123,6 @@ function recuperarProgreso() {
             }
         }
         
-        if (juegoCompletado) {
-            mostrarVictoria();
-        }
     }
 }
 
@@ -214,11 +197,13 @@ function iniciarJuego() {
             const claveIngresada = parseInt(inputFinal.value);
             
             if (claveIngresada === CLAVE_FINAL) {
-                // VICTORIA FINAL
+                // Cambio a escena 4 tras acertar 
                 mensajeFinal.innerHTML = "✅ ¡CLAVE CORRECTA! Exploit ejecutado. Accediendo al sistema...";
                 mensajeFinal.style.borderLeftColor = "#00ff41";
                 mensajeFinal.style.color = "#00ff41";
-                mostrarVictoria();
+                setTimeout(function() {
+                    window.location.href = "escena4.html";
+                }, 1000);
             } 
             else {
                 // CLAVE INCORRECTA
