@@ -161,7 +161,7 @@ function data (texto, repoLink, c1, c2, c3)  {
             
             <div class="footer">
                 🕶️ ScapeRoom Hackers - Modo Sigilo Activado 🕶️<br>
-                &copy; 2025 - Todos los derechos reservados
+                &copy; 2026 - Todos los derechos reservados - Hecho por Rubén Pariente, Luis López-Nuño y Marco Villamediana
             </div>
         </div>
     </div>
@@ -169,3 +169,5 @@ function data (texto, repoLink, c1, c2, c3)  {
 </html>
     ;`
 }
+
+module.exports = data;
