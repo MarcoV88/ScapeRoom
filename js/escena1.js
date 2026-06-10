@@ -168,6 +168,31 @@ comprobar.addEventListener("click", function(){
 
 
 img.addEventListener("click",function(){
-    window.location.href = "escena2.html";
-    })
+    window.location.href = "escena2.html"; 
+})
 
+const bateria = document.getElementById("bateria");
+for(let i = 1; i < 7; i++){
+    const div = document.createElement("div");
+    div.setAttribute("class", "barra");
+    let id = "id" + i;
+    div.setAttribute("id", id);
+    bateria.appendChild(div)
+}
+
+const codigo = document.getElementById("codigo");
+let codigos = ["01101000","01100001","01100011","01101011","01100101","01100001","01100100","01101111"];
+for(let i = 0; i < 8; i++){
+    const p = document.createElement("p");
+    p.innerText = codigos[i];
+    codigo.appendChild(p);
+}
+
+const inputs = document.getElementById("inputs");
+for(let i= 1; i < 9; i++){
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+    let id = "id" + i;
+    input.setAttribute("id", id);
+    inputs.appendChild(input);
+}
