@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escena4</title>
+    <link rel="stylesheet" href="../css/escena4.css">
+</head>
+<body>
+
+    <div id="escena-principal">
+
+        <h1 id="titulo-juego">LA PUERTA DE LA VERDAD</h1>
+
+        <div class="contenedor-puertas">
+
+            <div class= "tarjeta-puerta" id="btn-puerta1">
+                <div class="contenedor-imagen-puerta">
+                    <img src="../img/escena4.png" alt="puerta1">
+                </div>
+            </div>
+
+            <div class= "tarjeta-puerta" id="btn-puerta2">
+                <div class="contenedor-imagen-puerta">
+                    <img src="../img/escena4.png" alt="puerta1">
+                </div>
+            </div>
+            
+            <div class= "tarjeta-puerta" id="btn-puerta3">
+                <div class="contenedor-imagen-puerta">
+                    <img src="../img/escena4.png" alt="puerta1">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="escena-puerta1" class="escena">
+        <div id="capaLinterna" class="capa-oscura"></div>
+
+        <div id="pista-oculta" class="pista-oculta">
+            ALERTA DEL SISTEMA: archivo de volcado generado <br>
+            Inspeccione la consola de desarrollo
+        </div>
+
+        <button class="btn-regresar">REGRESAR AL VESTÍBULO</button>
+    </div>
+
+    <div id="escena-puerta2" class="escena">
+        <div class="caja-terminal">
+            <h2>SISTEMA DE ANULACIÓN CENTRAL</h2>
+            <p>Introduce la credencial de desencriptación para escapar:</p>
+
+            <div class="grupo-entrada">
+                <input type="text" id="entrada-codigo-final" placeholder="INGRESE EL CODIGO..." autocomplete="off">
+                <button id="btn-enviar-codigo">EJECUTAR</button>
+            </div>
+            <div id="salida-terminal" class="registro-salida">Esperando la entrada de datos...</div>
+        </div>
+        <button class="btn-regresar">REGRESAR AL VESTÍBULO</button>
+    </div>
+
+
+    <div id="escena-puerta3" class="escena">
+        <div class="caja-enigma">
+            <h2>SISTEMA DEL ENIGMA</h2>
+            <div class="texto-enigma">
+                "Soy el rincon donde los desarrolladores ven sus errores pasar, guardo secretos en texto que el usuario común no sabe buscar."
+            </div>
+        </div>
+        <button class="btn-regresar">REGRESAR AL VESTÍBULO</button>
+    </div>
+
+    <script src="../js/escena4.js"></script>
+    
+</body>
+</html>
