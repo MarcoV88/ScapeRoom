@@ -11,6 +11,50 @@ body {
     align-items: center;
 }
 
+/*BATERIA*/
+
+	
+#bateria{
+    position: fixed;
+    top: 120px;
+    right: 30px;
+
+    width: 60px;
+    height: 140px;
+
+    border: 3px solid #00ff41;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 5px;
+
+    box-shadow: 0 0 15px #00ff41;
+}
+
+.cabeza{
+    position: absolute;
+    top: -10px;
+    width: 25px;
+    height: 10px;
+    background-color: #00ff41;
+    border-radius: 4px 4px 0 0;
+}
+
+.barra{
+    width: 80%;
+    height: 15px;
+    background-color: #00ff41;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #00ff41;
+}
+
+
+
+
 .crt-global {
     position: fixed;
     top: 0;
